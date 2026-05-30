@@ -3,6 +3,9 @@
 # Give the script permission to run
 chmod +x evil-eye.sh
 
+# Create the file if it doesn't exist yet (The Bug Fix!)
+touch ~/.bashrc
+
 # Remove any previous evil eye setups from the bashrc to avoid duplicates
 sed -i '/evil-eye/d' ~/.bashrc
 sed -i '/PS1=/d' ~/.bashrc
