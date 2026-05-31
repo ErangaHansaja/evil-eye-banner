@@ -1,35 +1,38 @@
 #!/bin/bash
 
-# Define colors for our installer
+# colors
 RED='\e[1;31m'
+GREEN='\e[1;32m'
 NC='\e[0m'
 
 clear
-echo -e "${RED}--- Evil Eye Setup ---${NC}"
+echo -e "${RED}--- Evil Eye Banner Setup ---${NC}"
 
-# The 'read' command pauses the script and waits for you to type something
-echo -n "What is your custom banner name? : "
+# Install the necessary packages automatically
+echo -e "${GREEN}[*] Installing cowsay, figlet, and lolcat. This might take a minute...${NC}"
+pkg install cowsay figlet ruby -y
+gem install lolcat
+# get custom names
+echo ""
+echo -n "What is your custom banner name? : \c"
+read BANNER_NAME
+echo -n "What is your personal name? : \c"
 read USER_NAME
+#build the script
+echo "#!/bin/bash" > evil-eye.sh
+echo "clear" >> evil-eye.sh
+echo "cowsay -f eyes '$USER_NAME' | lolcat" >> evil-eye.sh
+echo "figlet '$BANNER_NAME' | lolcat" >> evil-eye.sh
+echo "echo ''" >> evil-eye.sh
 
-# Save that name into a hidden file on the phone
-echo "$USER_NAME" > ~/.banner_name
+chmod +x evil-eye.sh
 
-# Give the scripts permission to run
-chmod +x evil-eye.sh update.sh
-
-# Create the bashrc file if it doesn't exist yet
 touch ~/.bashrc
-
-# Remove any previous evil eye setups from the bashrc to avoid duplicates
 sed -i '/evil-eye/d' ~/.bashrc
 sed -i '/PS1=/d' ~/.bashrc
 
-# 1. Add our evil eye script to the Termux startup file
 echo "~/evil-eye-banner/evil-eye.sh" >> ~/.bashrc
-
-# 2. Change the terminal prompt to a glowing red ">>> " 
 echo "PS1='\[\e[1;31m\]>>>\[\e[0m\] '" >> ~/.bashrc
 
 echo ""
-echo -e "${RED}Setup complete! Your name has been saved.${NC}"
-echo "Restart your Termux app to see the magic."
+echo -e "${GREEN}Setup complete! Restart Termux to see your classic animated eyes.${NC}"
