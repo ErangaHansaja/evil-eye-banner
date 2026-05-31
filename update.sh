@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# colors
-BLUE='\e[1;34m'
-GREEN='\e[1;32m'
-NC='\e[0m'
+cd "$(dirname "$0")" || exit 1
+
+# Import the shared colors
+source colors.sh
 
 echo -e "${BLUE}[*] Checking the cloud for updates...${NC}"
 

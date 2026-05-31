@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# colors
-RED='\e[1;31m'
-GREEN='\e[1;32m'
-NC='\e[0m'
+cd "$(dirname "$0")" || exit 1
+
+# Import the shared colors
+source colors.sh
 
 clear
 echo -e "${RED}--- Evil Eye Banner Setup ---${NC}"
