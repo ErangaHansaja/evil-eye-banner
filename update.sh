@@ -17,4 +17,4 @@ git pull
 chmod +x evil-eye.sh install.sh update.sh
 
 echo ""
-echo -e "${GREEN}[*] Update complete, Grand Regent. Your eye is fully synced!${NC}"
+echo -e "${GREEN}[*] Update complete, Your Banner is fully synced!${NC}"
